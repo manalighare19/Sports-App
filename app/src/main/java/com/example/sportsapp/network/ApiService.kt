@@ -6,7 +6,5 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("searchplayers.php")
-    suspend fun getAllPlayers(
-        @Query("t") team: String,
-    ): PlayersAPIResponse
+    suspend fun getAllPlayers(@Query("t") team: String): PlayersAPIResponse
 }
