@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
+import com.example.sportsapp.R
 import com.example.sportsapp.data.Player
 import com.example.sportsapp.databinding.ItemRowBinding
 
@@ -34,6 +35,7 @@ class PlayerItemViewHolder(private val binding: ItemRowBinding) :
         val imageUrl = player.strThumb
         Glide.with(binding.playerImage.context)
             .load(imageUrl)
+            .placeholder(R.drawable.ic_account)
             .into(binding.playerImage)
     }
 }

@@ -1,12 +1,14 @@
 package com.example.sportsapp.ui
 
 import android.os.Bundle
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sportsapp.R
 import com.example.sportsapp.databinding.FragmentPlayersListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +41,18 @@ class PlayersListFragment : Fragment() {
             adapter = playersListAdapter
         }
 
-        viewModel.fetchPlayersInfo("arsenal")
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Handle search query submission
+                viewModel.fetchPlayersInfo(query ?: "")
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Handle search query text changes
+                return false
+            }
+        })
 
         viewModel.result.observe(viewLifecycleOwner) { state ->
             binding.apply {
@@ -50,15 +63,25 @@ class PlayersListFragment : Fragment() {
                     }
                     PlayersListViewModel.UiState.Empty -> {
                         progressBar.visibility = View.GONE
+                        emptyStateView.apply {
+                            visibility = View.VISIBLE
+                            emptyText.text = getString(R.string.empty_text)
+                            emptyImage.setImageResource(R.drawable.ic_search)
+                        }
                         playersListAdapter.submitList(emptyList())
                     }
                     PlayersListViewModel.UiState.Failure -> {
                         progressBar.visibility = View.GONE
-
+                        emptyStateView.apply {
+                            visibility = View.VISIBLE
+                            emptyText.text = getString(R.string.error_text)
+                            emptyImage.setImageResource(R.drawable.ic_error)
+                        }
                     }
                     PlayersListViewModel.UiState.Init,
                     PlayersListViewModel.UiState.Loading -> {
                         progressBar.visibility = View.VISIBLE
+                        emptyStateView.visibility = View.GONE
                     }
                 }
             }
