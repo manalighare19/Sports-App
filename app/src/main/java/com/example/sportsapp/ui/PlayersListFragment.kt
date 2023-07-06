@@ -7,17 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsapp.R
+import com.example.sportsapp.data.Player
 import com.example.sportsapp.databinding.FragmentPlayersListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PlayersListFragment : Fragment() {
+class PlayersListFragment : Fragment(), RowClickListener {
 
     private lateinit var binding: FragmentPlayersListBinding
     private val viewModel: PlayersListViewModel by viewModels()
-    private val playersListAdapter = PlayersListAdapter()
+    private val playersListAdapter = PlayersListAdapter(this@PlayersListFragment)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,4 +89,14 @@ class PlayersListFragment : Fragment() {
             }
         }
     }
+
+    override fun onRowClicked(playerDetails: Player) {
+        findNavController().navigate(
+            PlayersListFragmentDirections.actionPlayersListToPlayerDetails(playerDetails)
+        )
+    }
+}
+
+interface RowClickListener {
+    fun onRowClicked(playerDetails: Player)
 }

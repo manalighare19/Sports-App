@@ -10,7 +10,8 @@ import com.example.sportsapp.R
 import com.example.sportsapp.data.Player
 import com.example.sportsapp.databinding.ItemRowBinding
 
-class PlayersListAdapter : ListAdapter<Player, PlayerItemViewHolder>(DiffCallback()) {
+class PlayersListAdapter(private val rowClickListener: RowClickListener) :
+    ListAdapter<Player, PlayerItemViewHolder>(DiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerItemViewHolder {
         return PlayerItemViewHolder(
             ItemRowBinding.inflate(
@@ -23,6 +24,9 @@ class PlayersListAdapter : ListAdapter<Player, PlayerItemViewHolder>(DiffCallbac
 
     override fun onBindViewHolder(holder: PlayerItemViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            rowClickListener.onRowClicked(getItem(position))
+        }
     }
 }
 

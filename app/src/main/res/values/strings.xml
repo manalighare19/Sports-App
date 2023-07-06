@@ -4,4 +4,6 @@
     <string name="search_hint">Enter a keyword</string>
     <string name="empty_text">No data to show</string>
     <string name="error_text">Something went wrong! Check back again later.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

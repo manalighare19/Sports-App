@@ -10,5 +10,19 @@
         android:name="com.example.sportsapp.ui.PlayersListFragment"
         android:label="fragment_players_list"
         tools:layout="@layout/fragment_players_list">
+        <action
+            android:id="@+id/action_playersList_to_playerDetails"
+            app:destination="@id/playerDetails" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/playerDetails"
+        android:name="com.example.sportsapp.ui.PlayerDetailsFragment"
+        android:label="fragment_player_details"
+        tools:layout="@layout/fragment_player_details">
+
+        <argument
+            android:name="player"
+            app:argType="com.example.sportsapp.data.Player" />
     </fragment>
 </navigation>

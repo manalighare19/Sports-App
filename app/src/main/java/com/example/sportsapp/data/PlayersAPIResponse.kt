@@ -1,6 +1,7 @@
 package com.example.sportsapp.data
 
 import com.squareup.moshi.Json
+import java.io.Serializable
 
 data class PlayersAPIResponse(
     @Json(name = "player")
@@ -17,5 +18,5 @@ data class Player(
     val strTwitter: String?,
     val strInstagram: String?,
     val strThumb: String?
-)
+) : Serializable
 
