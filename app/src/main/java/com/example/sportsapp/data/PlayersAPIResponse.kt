@@ -5,7 +5,7 @@ import java.io.Serializable
 
 data class PlayersAPIResponse(
     @Json(name = "player")
-    val players: List<Player>
+    val players: List<Player>?
 )
 
 data class Player(

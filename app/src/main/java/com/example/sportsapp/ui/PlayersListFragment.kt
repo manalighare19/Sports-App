@@ -80,6 +80,7 @@ class PlayersListFragment : Fragment(), RowClickListener {
                             emptyText.text = getString(R.string.error_text)
                             emptyImage.setImageResource(R.drawable.ic_error)
                         }
+                        playersListAdapter.submitList(emptyList())
                     }
                     PlayersListViewModel.UiState.Init,
                     PlayersListViewModel.UiState.Loading -> {

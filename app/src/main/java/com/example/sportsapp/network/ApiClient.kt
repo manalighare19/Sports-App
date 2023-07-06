@@ -1,5 +1,6 @@
 package com.example.sportsapp.network
 
+import com.example.sportsapp.BuildConfig.SPORTS_DB_API_KEY
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -10,7 +11,7 @@ object ApiClient {
 
     private val retrofit =
         Retrofit.Builder()
-            .baseUrl("https://www.thesportsdb.com/api/v1/json/")
+            .baseUrl("https://www.thesportsdb.com/api/v1/json/$SPORTS_DB_API_KEY/")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 

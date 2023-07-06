@@ -23,7 +23,11 @@ class PlayersListViewModel @Inject constructor(private val repository: PlayerInf
             _result.value = UiState.Loading
             when (val response = repository.getAllPlayers(team)) {
                 is PlayerInfoResult.Success -> {
-                    _result.value = UiState.Data(response.playerInfoResult)
+                    if (response.playerInfoResult.players.isNullOrEmpty()) {
+                        _result.value = UiState.Empty
+                    } else {
+                        _result.value = UiState.Data(response.playerInfoResult)
+                    }
                 }
                 is PlayerInfoResult.Failure -> {
                     _result.value = UiState.Failure
